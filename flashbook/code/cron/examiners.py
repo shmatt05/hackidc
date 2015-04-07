@@ -8,6 +8,8 @@ class BookingConditionExaminerFactory(object):
     def create(cls, booking_condition):
         if isinstance(booking_condition, FlightBookingCondition):
             return FlightBookingConditionExaminer(booking_condition)
+        else:
+            raise AttributeError("Unsupported booking condition type")
 
 
 class BookingConditionExaminer(object):

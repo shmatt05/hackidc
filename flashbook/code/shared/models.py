@@ -22,8 +22,6 @@ class FlightBookingCondition(BookingCondition):
     exclude_companies = ndb.StringProperty(repeated=True)
     max_flight_duration = ndb.IntegerProperty()
     number_of_adult_tickets = ndb.IntegerProperty()
-    number_of_child_tickets = ndb.IntegerProperty()
-    number_of_infant_tickets = ndb.IntegerProperty()
     max_price = ndb.IntegerProperty(required=True)
     travel_class = ndb.StringProperty()
 

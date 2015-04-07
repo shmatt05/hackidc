@@ -6,6 +6,7 @@ from cron.examiners import BookingConditionExaminerFactory
 
 __author__ = 'Ari'
 
+
 class CheckRecipeHandler(Handler):
     def post(self):
         recipe_id = self.request.get('recipe_id')
@@ -21,13 +22,12 @@ class CheckRecipeHandler(Handler):
         self.data_service.update_entity(booking_request)
 
 
-
-class RecipesHandler(Handler):
+class CheckRecipesHandler(Handler):
     def post(self):
         recipes_keys = self.data_service.query_entities(Recipe, keys_only=True)
 
         # Add the task to the recipe queue.
         for recipe in recipes_keys:
             taskqueue.Task(
-                params={'recipe_id':recipe.id()}
+                params={'recipe_id': recipe.id()}
             ).add(Queues.CHECK_RECIPE_QUEUE)

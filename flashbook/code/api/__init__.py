@@ -4,4 +4,5 @@ API_PREFIX = '/api'
 
 
 class WebURLs(object):
-    CHANNELS = '/channels'
+    RECIPES = '/recipes'
+    RECIPE = '/recipe/<recipe_id>'

@@ -1,14 +1,15 @@
 from shared.framework import Handler
-from shared.models import Channel, ChannelItem
-from serializers import ChannelSerializer
+from shared.models import Recipe
+from serializers import RecipeSerializer
 
 __author__ = 'david'
 
 
-class ChannelsHandler(Handler):
+class RecipesHandler(Handler):
     def get(self):
-        serializer = ChannelSerializer()
-        channels = self.data_service.query_entities(Channel)
-        serialized_channels = [serializer.serialize(channel) for channel in channels]
+        serializer = RecipeSerializer()
+        # TODO: get only the authenticated user's recipes.
+        recipes = self.data_service.query_entities(Recipe)
+        serialized_recipes = [serializer.serialize(recipe) for recipe in recipes]
 
-        self.successful_response(channels=serialized_channels)
+        self.successful_response(recipes=serialized_recipes)
