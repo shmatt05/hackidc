@@ -1,11 +1,10 @@
 import logging
+import json
+import urllib2
 from google.appengine.api import mail
-
-
 from google.appengine.ext import ndb
 from google.appengine.api import search
 
-from shared.models import Channel, ChannelItem
 
 __author__ = 'david'
 
@@ -115,20 +114,93 @@ def get_data_service():
     return DataService()
 
 
-class ChannelService(object):
+class FlightSearch:
+    """ Flight Search API """
+
     def __init__(self):
-        self.data_service = get_data_service()
+        """ Set API KEY """
+        self.api_key = "nzPtUZtGWpnYAkC1NGGlNQxjCTMyPVfs"
 
-    def get_channel_items(self, channel):
-        return self.data_service.query_entities(ChannelItem,
-                                                filter_expression=ChannelItem.channel == channel.key)
+    def inspiration_search(self, origin, destination=None, departure_date=None, duration=None, direct=None,
+                           max_price=None, aggregation_mode="DAY"):
+        """ Amadeus Inspiration Search """
+        uri = "http://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?"
+        uri_dict = {}
+        if origin is None:
+            return False
+        else:
+            uri_dict["origin"] = origin
 
+        uri_dict["destination"] = destination
+        uri_dict["departure_date"] = departure_date
+        uri_dict["duration"] = duration
+        uri_dict["direct"] = direct
+        uri_dict["max_price"] = max_price
+        uri_dict["aggregation_mode"] = aggregation_mode
+        uri_dict["apikey"] = self.api_key
 
-def get_channel_service():
-    return ChannelService()
+        query = ""
+        for parm in uri_dict:
+            if uri_dict[parm] is not None:
+                query += parm + "=" + str(uri_dict[parm]) + "&"
+
+        url = uri + query[:-1]
+
+        try:
+            return json.load(urllib2.urlopen(url))
+            # return url
+        except:
+            return False
+
+    def low_fare_search(self, origin, destination, departure_date, return_date=None, arrive_by=None, return_by=None,
+                        adults=1, direct="false", include_airlines=None, exclude_airlines=None, currency="USD",
+                        max_price=None, travel_class="ECONOMY", number_of_results=250):
+        """ Amadeus Low Fare Search """
+        uri = "http://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?"
+        uri_dict = {}
+        if origin is None:
+            return False
+        else:
+            uri_dict["origin"] = origin
+
+        if destination is None:
+            return False
+        else:
+            uri_dict["destination"] = destination
+
+        if departure_date is None:
+            return False
+        else:
+            uri_dict["departure_date"] = departure_date
+
+        uri_dict["return_date"] = return_date
+        uri_dict["arrive_by"] = arrive_by
+        uri_dict["return_by"] = return_by
+        uri_dict["adults"] = adults
+        uri_dict["direct"] = direct
+        uri_dict["include_airlines"] = include_airlines
+        uri_dict["exclude_airlines"] = exclude_airlines
+        uri_dict["currency"] = currency
+        uri_dict["max_price"] = max_price
+        uri_dict["travel_class"] = travel_class
+        uri_dict["number_of_results"] = number_of_results
+        uri_dict["apikey"] = self.api_key
+
+        query = ""
+        for parm in uri_dict:
+            if uri_dict[parm] is not None:
+                query += parm + "=" + str(uri_dict[parm]) + "&"
+
+        url = uri + query[:-1]
+
+        try:
+            return json.load(urllib2.urlopen(url))
+            # return url
+        except:
+            return False
+
 
 class EmailService(object):
-
     def __init__(self, receiver_email, pnr, name):
         self.receiver_email = receiver_email
         self.pnr = pnr
@@ -137,7 +209,7 @@ class EmailService(object):
 
     def send_mail(self):
         message = mail.EmailMessage("Flashbook Inc. <" + self.sender_email + ">",
-                            subject="Your Flight Has Been Booked!")
+                                    subject="Your Flight Has Been Booked!")
         message.to(self.name + "<" + self.receiver_email + ">")
         message.body = """
         Dear """ + str(self.name) + """
