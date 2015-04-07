@@ -4,41 +4,48 @@ from google.appengine.ext import ndb
 from google.appengine.ext.ndb import polymodel
 
 
-class Video(ndb.Model):
-    title = ndb.StringProperty(required=True)
-    url = ndb.StringProperty(required=True)
-    created_at = ndb.DateTimeProperty(auto_now_add=True)
+class BookingCondition(polymodel.PolyModel):
+    pass
 
 
-class Channel(ndb.Model):
-    title = ndb.StringProperty(required=True)
-    description = ndb.StringProperty(required=True)
-    intro_video = ndb.KeyProperty(kind=Video, required=True)
+class FlightBookingCondition(BookingCondition):
+    """
+    And relation between all non None values.
+    """
+    origin = ndb.StringProperty(required=True)
+    destination = ndb.StringProperty(required=True)
+    booking_start_date = ndb.DateTimeProperty(required=True)
+    booking_end_date = ndb.DateTimeProperty(required=True)
+    # If the duration is None, it means the trip starts at booking_start_date and ends at booking_end_date.
+    duration = ndb.IntegerProperty()
+    number_of_connections = ndb.IntegerProperty()
+    exclude_companies = ndb.StringProperty(repeated=True)
+    max_flight_duration = ndb.IntegerProperty()
+    number_of_adult_tickets = ndb.IntegerProperty()
+    number_of_child_tickets = ndb.IntegerProperty()
+    number_of_infant_tickets = ndb.IntegerProperty()
+    max_price = ndb.IntegerProperty(required=True)
+    travel_class = ndb.StringProperty()
 
 
-class ChannelItem(polymodel.PolyModel):
-    channel = ndb.KeyProperty(kind=Channel, required=True)
-    title = ndb.StringProperty(required=True)
+class HotelBookingCondition(BookingCondition):
+    """
+    Not supported yet but here for design\architecture reasons.
+    """
+    pass
+
+
+class User(ndb.Model):
+    # TODO: implement.
+    pass
+
+
+class Recipe(ndb.Model):
+    user = ndb.KeyProperty(User, required=True)
+    title = ndb.StringProperty()
     description = ndb.StringProperty()
-    video = ndb.KeyProperty(Video, required=True)
-    related_items = ndb.KeyProperty(repeated=True)
-
-    # questionnaire = ndb.KeyProperty(Video, required=True)
-    # additional_material = ndb.KeyProperty(AdditionalMaterial, required=True)
-
-
-class Term(ChannelItem):
-    pass
-
-
-class TopicalNews(ChannelItem):
-    pass
-
-
-class Lesson(ndb.Model):
-    title = ndb.StringProperty(required=True)
-    video = ndb.KeyProperty(Video, required=True)
-
-
-class Course(ChannelItem):
-    lessons = ndb.LocalStructuredProperty(Lesson, repeated=True)
+    booking_condition = ndb.LocalStructuredProperty(required=True)
+    enabled = ndb.BooleanProperty(required=True, default=False)
+    enabled_at = ndb.DateTimeProperty()
+    created_at = ndb.DateTimeProperty(auto_now_add=True)
+    booked = ndb.BooleanProperty(required=True, default=False)
