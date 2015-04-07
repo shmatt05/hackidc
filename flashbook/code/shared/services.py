@@ -1,4 +1,6 @@
 import logging
+from google.appengine.api import mail
+
 
 from google.appengine.ext import ndb
 from google.appengine.api import search
@@ -124,3 +126,23 @@ class ChannelService(object):
 
 def get_channel_service():
     return ChannelService()
+
+class EmailService(object):
+
+    def __init__(self, receiver_email, pnr, name):
+        self.receiver_email = receiver_email
+        self.pnr = pnr
+        self.sender_email = 'sender@flashbook-app.appspotmail.com'
+        self.name = name
+
+    def send_mail(self):
+        message = mail.EmailMessage("Flashbook Inc. <" + self.sender_email + ">",
+                            subject="Your Flight Has Been Booked!")
+        message.to(self.name + "<" + self.receiver_email + ">")
+        message.body = """
+        Dear """ + str(self.name) + """
+
+        Your flight has been succefully booked!
+        PNR : """ + str(self.pnr)
+
+        message.send()
