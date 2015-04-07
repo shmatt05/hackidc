@@ -1,0 +1,24 @@
+application: flashbook-app
+version: ci
+module: api
+
+runtime: python27
+threadsafe: true
+instance_class: F1
+api_version: 1
+
+automatic_scaling:
+  min_idle_instances: 0
+  max_idle_instances: 1
+  min_pending_latency: automatic  # default value
+  max_pending_latency: 30ms
+
+handlers:
+
+- url: /api/script/.*
+  script: api.script.routes.APP
+  login: optional
+
+- url: /api/.*
+  script: api.web.routes.APP
+  login: optional

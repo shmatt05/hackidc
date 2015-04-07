@@ -1,0 +1,8 @@
+application: flashbook-app
+
+dispatch:
+- url: "*/api/*"
+  module: api
+
+- url: "*/_ah/*"
+  module: default
