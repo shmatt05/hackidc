@@ -37,7 +37,8 @@ class HotelBookingCondition(BookingCondition):
 
 class User(ndb.Model):
     # TODO: implement.
-    pass
+    email = ndb.StringProperty(required=True)
+    name = ndb.StringProperty(required=True)
 
 
 class Recipe(ndb.Model):
@@ -61,6 +62,7 @@ class FlightBookingInfo(BookingInfo):
 
 
 class BookingRequest(ndb.Model):
+    recipe_id = ndb.IntegerProperty(required=True)
     user = ndb.KeyProperty(User, required=True)
     booking_infos = ndb.KeyProperty(BookingInfo, repeated=True)
     is_booked = ndb.BooleanProperty(required=True, default=False)
