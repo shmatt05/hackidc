@@ -48,4 +48,19 @@ class Recipe(ndb.Model):
     enabled = ndb.BooleanProperty(required=True, default=False)
     enabled_at = ndb.DateTimeProperty()
     created_at = ndb.DateTimeProperty(auto_now_add=True)
-    booked = ndb.BooleanProperty(required=True, default=False)
+    is_booked = ndb.BooleanProperty(required=True, default=False)
+
+
+class BookingInfo(polymodel.PolyModel):
+    user = ndb.KeyProperty(User, required=True)
+
+
+class FlightBookingInfo(BookingInfo):
+    # TODO: add properties required for booking a flight.
+    pass
+
+
+class BookingRequest(ndb.Model):
+    user = ndb.KeyProperty(User, required=True)
+    booking_infos = ndb.KeyProperty(BookingInfo, repeated=True)
+    is_booked = ndb.BooleanProperty(required=True, default=False)
