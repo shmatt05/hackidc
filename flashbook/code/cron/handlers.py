@@ -1,25 +1,24 @@
-__author__ = 'Ari'
 from shared.framework import Handler
-from shared.models import Recipe
 from shared import Queues
 from google.appengine.api import taskqueue
+from shared.models import Recipe, BookingRequest
+from cron.examiners import BookingConditionExaminerFactory
 
-import webapp2
-import Recipe
-import Queue
+__author__ = 'Ari'
 
-
-
-class checkRecipeHandler(Handler):
-
+class CheckRecipeHandler(Handler):
     def post(self):
         recipe_id = self.request.get('recipe_id')
-        recipe = self.data_service.get_entity_by_key(recipe_id)
-        params_dict = Recipe.parsed_recipe(recipe)
+        recipe = self.data_service.get_entity(Recipe, recipe_id)
 
-        #TODO: get_results_from_tomer
-    #TODO: def get_Results_from_tomer
+        booking_condition_examiner = BookingConditionExaminerFactory.create(recipe.booking_condition)
+        possible_booking_infos = booking_condition_examiner.examine()
+        if possible_booking_infos:
+            self.__create_booking_request(recipe, possible_booking_infos)
 
+    def __create_booking_request(self, recipe, possible_booking_infos):
+        booking_request = BookingRequest(user=recipe.user, booking_infos=possible_booking_infos)
+        self.data_service.update_entity(booking_request)
 
 
 

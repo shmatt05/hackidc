@@ -4,5 +4,8 @@ dispatch:
 - url: "*/api/*"
   module: api
 
+- url: "*/cron/*"
+  module: cron
+
 - url: "*/_ah/*"
   module: default
