@@ -15,10 +15,6 @@ automatic_scaling:
 
 handlers:
 
-- url: /api/script/.*
-  script: api.script.routes.APP
-  login: optional
-
 - url: /api/.*
   script: api.web.routes.APP
   login: optional

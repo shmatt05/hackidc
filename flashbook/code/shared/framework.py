@@ -1,8 +1,6 @@
-import webaypp2
+import webapp2
 import json
 import logging
-
-from shared.services import get_data_service
 
 __author__ = 'david'
 

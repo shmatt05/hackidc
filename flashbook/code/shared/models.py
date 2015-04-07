@@ -39,10 +39,10 @@ class User(ndb.Model):
 
 
 class Recipe(ndb.Model):
-    user = ndb.KeyProperty(User, required=True)
+    user = ndb.KeyProperty(User, required=False)
     title = ndb.StringProperty()
     description = ndb.StringProperty()
-    booking_condition = ndb.LocalStructuredProperty(required=True)
+    booking_condition = ndb.LocalStructuredProperty(BookingCondition, required=True)
     enabled = ndb.BooleanProperty(required=True, default=False)
     enabled_at = ndb.DateTimeProperty()
     created_at = ndb.DateTimeProperty(auto_now_add=True)
