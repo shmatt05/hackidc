@@ -6,6 +6,7 @@ __author__ = 'Ari'
 
 
 class CheckRecipeHandler(Handler):
+
     def post(self):
         recipe_id = self.request.get('recipe_id')
         recipe = self.data_service.get_entity(Recipe, recipe_id)
@@ -18,6 +19,7 @@ class CheckRecipeHandler(Handler):
     def __create_booking_request(self, recipe, possible_booking_infos):
         booking_request = BookingRequest(user=recipe.user, booking_infos=possible_booking_infos)
         self.data_service.update_entity(booking_request)
+
 
 
 
