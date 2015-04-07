@@ -1,23 +1,23 @@
-__author__ = 'Ari'
 from shared.framework import Handler
-import webapp2
-import Recipe
-from shared.services import EmailService
+from shared.models import Recipe, BookingRequest
+from cron.examiners import BookingConditionExaminerFactory
 
-class checkRecipeHandler(Handler):
+__author__ = 'Ari'
 
+
+class CheckRecipeHandler(Handler):
     def post(self):
-
         recipe_id = self.request.get('recipe_id')
-        recipe = self.data_service.get_entity_by_key(recipe_id)
+        recipe = self.data_service.get_entity(Recipe, recipe_id)
 
-        params_dict = Recipe.parse_recipe(recipe)
+        booking_condition_examiner = BookingConditionExaminerFactory.create(recipe.booking_condition)
+        possible_booking_infos = booking_condition_examiner.examine()
+        if possible_booking_infos:
+            self.__create_booking_request(recipe, possible_booking_infos)
 
-        #TODO: get_results_from_tomer
-        #TODO: def get_Results_from_tomer
-
-    mail_sender = EmailService()
-    mail_sender.send_mail()
+    def __create_booking_request(self, recipe, possible_booking_infos):
+        booking_request = BookingRequest(user=recipe.user, booking_infos=possible_booking_infos)
+        self.data_service.update_entity(booking_request)
 
 
 
