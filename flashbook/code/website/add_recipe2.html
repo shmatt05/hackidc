@@ -13,6 +13,8 @@
 		<meta name="keywords" content="" />
 		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="css/style.css" />
+
+
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 	</head>
@@ -111,8 +113,6 @@
                                       <input type="text" class="recipe-autocomplete" id="recipe-from" value="" placeholder="Origin City Or Airport" />
                                     </div>
                                     <div class="ui-widget" style="color:#000;margin-top:2em; font-family:Arial">
-                                        Result:
-                                        <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
                                     <div class="romvos">
                                       <!--<img src="http://top-antropos.com/images/7/Maria-Callas/Maria-Callas%20(14).jpg"/>-->
                                       <input type="text" class="recipe-autocomplete" id="recipe-from" value="" placeholder="Destination City Or Airport" />
@@ -157,10 +157,6 @@
             
             <script>
                 $(function() {
-                    function log( message ) {
-                    $( "<div>" ).text( message ).prependTo( "#log" );
-                    $( "#log" ).scrollTop( 0 );
-                    }
                     $( ".recipe-autocomplete" ).autocomplete({
                         source: function( request, response ) {
                         $.ajax({
@@ -177,9 +173,8 @@
                     },
                     minLength: 3,
                     select: function( event, ui ) {
-                    log( ui.item ?
-                    "Selected: " + ui.item.label :
-                    "Nothing selected, input was " + this.value);
+                      var $url = 'images/' + $('.romvos input').val().toLowerCase() + '.jpg';
+                      $('.romvos').css('background-image', 'url(' + $url + ')');
                     },
                     open: function() {
                     $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
