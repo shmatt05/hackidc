@@ -4,8 +4,7 @@ import urllib2
 from google.appengine.api import mail
 from google.appengine.ext import ndb
 from google.appengine.api import search, urlfetch
-
-
+from random import randint
 
 __author__ = 'david'
 
@@ -203,8 +202,9 @@ class FlightSearch:
             return False
 
 
+# TODO: ADD PNR and other details
 class EmailService(object):
-    def __init__(self, receiver_email, pnr, name):
+    def __init__(self, receiver_email, name, pnr):
         self.receiver_email = receiver_email
         self.pnr = pnr
         self.sender_email = 'sender@flashbook-app.appspotmail.com'
@@ -215,9 +215,19 @@ class EmailService(object):
                                     subject="Your Flight Has Been Booked!")
         message.to(self.name + "<" + self.receiver_email + ">")
         message.body = """
-        Dear """ + str(self.name) + """
+        Dear """ + str(self.name) + """,
 
         Your flight has been succefully booked!
         PNR : """ + str(self.pnr)
 
         message.send()
+
+
+class BookingService(object):
+    """
+    Only works in the Live API, not in the sandbox HackIDC
+    """
+
+    def book(self):
+        return "LYED" + str(randint(1134, 9999)) + "F"
+
