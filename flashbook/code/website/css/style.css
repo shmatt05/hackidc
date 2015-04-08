@@ -3730,3 +3730,66 @@
 	body.is-mobile.landing #footer {
 		background-color: #1d242a;
 	}
+    
+ /* Added */
+.romvos{
+  width: 150px;
+  height: 150px;
+  border: 9px solid #ccc;
+  transform: rotateZ(45deg);
+  -webkit-transform: rotateZ(45deg);
+  /*margin: 40px 40px 0 40px;*/
+  margin: auto;
+  margin-top: 80px;
+  overflow:hidden;
+  box-shadow: 9px 9px 0 0 #21B2A6;
+  
+   -webkit-transition: box-shadow 0.4s;
+  transition: box-shadow 0.4s;
+}
+.romvos:first-child{
+  margin-bottom: 80px;
+  margin-top: 0px;
+}
+.romvos img{
+  -webkit-transform: rotateZ(-45deg) translateY(-50px);
+  transform: rotateZ(-45deg) translateY(-50px);
+  opacity: 0.2;
+  position: absolute;
+  left: -80%;
+  top: -130%;
+}
+.romvos:hover {
+  box-shadow: 0 0 0 0 #ccc;
+  -webkit-transition: box-shadow 0.7s;
+  transition: box-shadow 0.7s;
+}
+.romvos:hover img{
+  opacity: 1;
+   -webkit-transition: opacity 0.7s;
+  transition: opacity 0.7s;
+}
+.romvos input{
+    position:relative;
+    left: -30%;
+    top: 35%;
+    width: 150%;
+    padding-left:40px;
+  -webkit-transform: rotateZ(-45deg);
+  transform: rotateZ(-45deg);
+  background: none repeat scroll 0% 0% rgba(204, 204, 204, 0.3) !important;
+}
+.recipe form {
+    margin: 0px 0px -2em;
+}
+.wrapper.recipe {
+padding: 2em 2em 4em;
+}
+
+.recipe-hr {
+    margin: 3em 0px 1em;
+}
+
+.recipe-hr.marginer{
+    margin: 3em 0px -2em;
+}
