@@ -17,3 +17,10 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
+
+- url: /website
+  static_dir: website
+
+- url: /website
+  static_files: website/index.html
+  upload: website/index.html
