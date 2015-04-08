@@ -14,6 +14,7 @@ $.ajax({
     url : 'http://flashbook-app.appspot.com/api/recipe/all',
     dataType : 'json',
     //contentType : 'application/json; charset=UTF-8',
+    type : 'GET'
 }).done(function(data, textStatus, jqXHR) {
   console.log(data);
 
