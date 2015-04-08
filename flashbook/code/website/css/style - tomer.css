@@ -3747,7 +3747,7 @@
   overflow:hidden;
   box-shadow: 9px 9px 0 0 #21B2A6;
   display:inline-block;
-   -webkit-transition: box-shadow 0.4s;
+  -webkit-transition: box-shadow 0.4s;
   transition: box-shadow 0.4s;
 }
 
@@ -3755,6 +3755,20 @@
     .romvos{
         width: 150px;
         height: 150px;
+        margin: 80px auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto ;
+    }
+    .romvos input{
+       position:relative;
+       left: -30%;
+       top: 35%;
+       width: 150%;
+       padding-left:40px;
+      -webkit-transform: rotateZ(-45deg);
+      transform: rotateZ(-45deg);
+      background: none repeat scroll 0% 0% rgba(204, 204, 204, 0.3) !important;
     }
 }
 
@@ -3782,8 +3796,8 @@
 }
 .romvos input{
     position:relative;
-    left: -30%;
-    top: 35%;
+    left: -25%;
+    top: 40%;
     width: 150%;
     padding-left:40px;
   -webkit-transform: rotateZ(-45deg);
