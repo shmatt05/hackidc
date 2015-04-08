@@ -17,13 +17,13 @@ class FlightBookingCondition(BookingCondition):
     booking_start_date = ndb.DateTimeProperty(required=True)
     booking_end_date = ndb.DateTimeProperty(required=True)
     # If the duration is None, it means the trip starts at booking_start_date and ends at booking_end_date.
+    # TODO: add min max duration
     duration = ndb.IntegerProperty()
     number_of_connections = ndb.IntegerProperty()
     exclude_companies = ndb.StringProperty(repeated=True)
     max_flight_duration = ndb.IntegerProperty()
-    number_of_adult_tickets = ndb.IntegerProperty()
+    number_of_adult_tickets = ndb.IntegerProperty(required=True, default=1)
     max_price = ndb.IntegerProperty(required=True)
-    travel_class = ndb.StringProperty()
 
 
 class HotelBookingCondition(BookingCondition):
@@ -50,15 +50,16 @@ class Recipe(ndb.Model):
 
 
 class BookingInfo(polymodel.PolyModel):
-    user = ndb.KeyProperty(User, required=True)
+    user = ndb.KeyProperty(User, required=False)
 
 
 class FlightBookingInfo(BookingInfo):
-    # TODO: add properties required for booking a flight.
-    pass
+    price = ndb.FloatProperty(required=True)
+    number_of_adult_tickets = ndb.IntegerProperty(required=True)
+    itineraries = ndb.JsonProperty(required=True)
 
 
 class BookingRequest(ndb.Model):
-    user = ndb.KeyProperty(User, required=True)
-    booking_infos = ndb.KeyProperty(BookingInfo, repeated=True)
+    user = ndb.KeyProperty(User, required=False)
+    booking_infos = ndb.LocalStructuredProperty(BookingInfo, repeated=True)
     is_booked = ndb.BooleanProperty(required=True, default=False)

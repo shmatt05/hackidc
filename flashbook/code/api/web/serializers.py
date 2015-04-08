@@ -91,9 +91,6 @@ class FlightBookingConditionSerializer(object):
             serialized_flight_booking_condition[
                 'number_of_adult_tickets'] = flight_booking_condition.number_of_adult_tickets
 
-        if flight_booking_condition.travel_class is not None:
-            serialized_flight_booking_condition['travel_class'] = flight_booking_condition.travel_class
-
         return serialized_flight_booking_condition
 
     def deserialize(self, serialized_flight_booking_condition):
@@ -121,8 +118,5 @@ class FlightBookingConditionSerializer(object):
         if 'number_of_adult_tickets' in serialized_flight_booking_condition:
             flight_booking_condition.number_of_adult_tickets = serialized_flight_booking_condition[
                 'number_of_adult_tickets']
-
-        if 'travel_class' in serialized_flight_booking_condition:
-            flight_booking_condition.travel_class = serialized_flight_booking_condition['travel_class']
 
         return flight_booking_condition

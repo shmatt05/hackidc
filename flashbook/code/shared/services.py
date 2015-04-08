@@ -3,7 +3,8 @@ import json
 import urllib2
 from google.appengine.api import mail
 from google.appengine.ext import ndb
-from google.appengine.api import search
+from google.appengine.api import search, urlfetch
+
 
 
 __author__ = 'david'
@@ -147,14 +148,14 @@ class FlightSearch:
         url = uri + query[:-1]
 
         try:
+            urlfetch.set_default_fetch_deadline(60)
             return json.load(urllib2.urlopen(url))
-            # return url
-        except:
+        except Exception:
             return False
 
     def low_fare_search(self, origin, destination, departure_date, return_date=None, arrive_by=None, return_by=None,
                         adults=1, direct="false", include_airlines=None, exclude_airlines=None, currency="USD",
-                        max_price=None, travel_class="ECONOMY", number_of_results=250):
+                        max_price=None, number_of_results=250):
         """ Amadeus Low Fare Search """
         uri = "http://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?"
         uri_dict = {}
@@ -178,11 +179,12 @@ class FlightSearch:
         uri_dict["return_by"] = return_by
         uri_dict["adults"] = adults
         uri_dict["direct"] = direct
-        uri_dict["include_airlines"] = include_airlines
-        uri_dict["exclude_airlines"] = exclude_airlines
+        if include_airlines:
+            uri_dict["include_airlines"] = include_airlines
+        if exclude_airlines:
+            uri_dict["exclude_airlines"] = exclude_airlines
         uri_dict["currency"] = currency
         uri_dict["max_price"] = max_price
-        uri_dict["travel_class"] = travel_class
         uri_dict["number_of_results"] = number_of_results
         uri_dict["apikey"] = self.api_key
 
@@ -194,9 +196,10 @@ class FlightSearch:
         url = uri + query[:-1]
 
         try:
+            urlfetch.set_default_fetch_deadline(60)
             return json.load(urllib2.urlopen(url))
             # return url
-        except:
+        except Exception, ex:
             return False
 
 

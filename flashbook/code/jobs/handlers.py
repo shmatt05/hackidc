@@ -4,6 +4,7 @@ from google.appengine.api import taskqueue
 from shared.models import Recipe, BookingRequest
 from jobs.examiners import BookingConditionExaminerFactory
 from jobs import JobsURLs, get_jobs_full_url
+from shared.framework import BusinessException
 
 __author__ = 'Ari'
 
@@ -11,7 +12,10 @@ __author__ = 'Ari'
 class CheckRecipeHandler(Handler):
     def post(self):
         recipe_id = self.request.get('recipe_id')
-        recipe = self.data_service.get_entity(Recipe, recipe_id)
+        recipe = self.data_service.get_entity(Recipe, int(recipe_id))
+
+        if recipe is None:
+            raise BusinessException(400, 'Invalid recipe id')
 
         booking_condition_examiner = BookingConditionExaminerFactory.create(recipe.booking_condition)
         possible_booking_infos = booking_condition_examiner.examine()
