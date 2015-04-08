@@ -1,1 +1,77 @@
-Hello world!
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>CodePen - A Pen by  temper</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+  <div class='emTarget'></div>
+<div class='wrapper'>
+  <div class='coreToolbar'>
+    <div class='title'>
+      <span class='appTitle'>Material Design Demo</span>
+      <!-- / Re: Drawer-title: This is the same information in two places, which seems inelegant - the rationale for this is that if the user has JS disabled, switching between "app" and "drawer" titles is handled via CSS and media queries, which are widely supported, and meaning that the only part of this feature that will break is switching between "app" and "drawer" titles in the toolbar-pullout, rather than not having a title altogether. -->
+      <span class='drawerTitle'>
+        <i class='fa fa-bars' id='drawerToggle'></i>
+        Example Title
+      </span>
+    </div>
+    <div class='nav'>
+      <ul class='navItems'>
+        <li class='navItem'>
+          <a>Example Link</a>
+        </li>
+        <li class='navItem'>
+          <a>Example Link</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class='coreHeader'></div>
+  <button class='btn btn-action'>
+    <i class='fa fa-plus'></i>
+  </button>
+  <div class='inner'></div>
+  <div class='contentContainer'>
+    <div class='contentDrawer'>
+      <div class='head'>
+        <span>Example Title</span>
+      </div>
+      <div class='body'>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <button class='btn btn-rect btn-raised'>Raised Button</button>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <form>
+          <div class='group'>
+            <input type='text'>
+            <span class='selectedBar'></span>
+            <label>Example Input</label>
+          </div>
+        </form>
+      </div>
+      <div class='footer'>
+        <button class='btn btn-rect hoverable'>Accept</button>
+        <button class='btn btn-rect'>Decline</button>
+      </div>
+    </div>
+    <div class='credits'>
+      <a href='http://codepen.io/Lymelight/pen/XJjWVz' target='blank'>A pen by Chris Mills</a>
+    </div>
+  </div>
+</div>
+
+  <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
+
+  <script src="js/index.js"></script>
+
+</body>
+
+</html>
