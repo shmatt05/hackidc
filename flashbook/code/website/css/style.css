@@ -3741,9 +3741,10 @@
   /*margin: 40px 40px 0 40px;*/
   margin: auto;
   margin-top: 80px;
+  margin-right: 80px;
   overflow:hidden;
   box-shadow: 9px 9px 0 0 #21B2A6;
-  
+  display:inline-block;
    -webkit-transition: box-shadow 0.4s;
   transition: box-shadow 0.4s;
 }
@@ -3792,6 +3793,10 @@ padding: 2em 2em 4em;
 
 .recipe-hr.marginer{
     margin: 3em 0px -2em;
+}
+.wrapper.ari {
+	margin: 10px 0 3.5em 0;
+	padding: 2em 0 4em 0;
 }
 
 .ui-autocomplete {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>My Recipes</title>
+
+    <link rel="stylesheet" href="css/myRecipes.css">
+
+</head>
+
+<body>
+
+  <div id='wrapper'>
+  		<div class='cool_btn1 orange'>
+				<h1 class='top'>Paris<i> TLV</i></h1>
+				<h2><i class="fa fa-plane"></i></h2>
+			</div>
+			<div class='cool_btn1 green' id='plane1' onclick="change_autorefreshdiv()">
+				<h1 class='top' id='top'>NY <i> TLV</i></h1>
+				<h2><i class="fa fa-plane"></i></h2>
+			</div>
+				<div class='cool_btn1 green'>
+				<h1 class='top'>NY <i> hotel</i></h1>
+				<h2><i class="fa fa-bed"></i></h2>
+			</div>
+			<div class='cool_btn1 green'>
+				<h1 class='top'>London <i>paris</i></h1>
+				<h2><i class="fa fa-train"></i></h2>
+			</div>
+		</div>
+</body>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="js/myrecipes.js"></script>
+
+<script>
+	
+function change_autorefreshdiv(){
+    var NAME = document.getElementById("plane1");
+    var currentClass = NAME.className;
+    if (currentClass == "cool_btn1 green") { // Check the current class name
+        NAME.className = "cool_btn1 black";   // Set other class name
+    } else {
+        NAME.className = "cool_btn1 green";  // Otherwise, use `second_name`
+    }
+}   
+
+
+</script>
+
+
+</html>
