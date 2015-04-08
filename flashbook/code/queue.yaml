@@ -1,0 +1,3 @@
+queue:
+- name: check-recipe-queue
+  rate: 120/s

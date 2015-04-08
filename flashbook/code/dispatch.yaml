@@ -4,8 +4,8 @@ dispatch:
 - url: "*/api/*"
   module: api
 
-- url: "*/cron/*"
-  module: cron
+- url: "*/jobs/*"
+  module: jobs
 
 - url: "*/_ah/*"
   module: default
