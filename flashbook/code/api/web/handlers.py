@@ -57,3 +57,25 @@ class RecipesHandler(Handler):
         self.data_service.update_entity(recipe)
 
         self.successful_response(recipe_id=recipe.key.id())
+
+
+class RecipeHandler(Handler):
+    @authenticate_user()
+    def put(self, recipe_id):
+        serializer = RecipeSerializer()
+        serialized_recipe = json.loads(self.request.body)
+
+        recipe = self.data_service.get_entity(Recipe, int(recipe_id))
+        if recipe is None:
+            raise BusinessException(400, 'Invalid recipe')
+
+        InsertRecipeValidator().validate(serialized_recipe)
+
+        was_enabled = recipe.enabled
+        serializer.deserialize_into_recipe(recipe, serialized_recipe)
+        if not was_enabled and recipe.enabled:
+            recipe.enabled_at = datetime.now()
+
+        self.data_service.update_entity(recipe)
+
+        self.successful_response(recipe_id=recipe.key.id())

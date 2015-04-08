@@ -4,6 +4,6 @@ API_PREFIX = '/api'
 
 
 class WebURLs(object):
-    LOGIN = '/login'
-    RECIPES = '/recipes'
+    LOGIN = '/user/login'
+    RECIPE_ALL = '/recipe/all'
     RECIPE = '/recipe/<recipe_id>'

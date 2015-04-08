@@ -48,6 +48,15 @@ class RecipeSerializer(object):
 
         return recipe
 
+    def deserialize_into_recipe(self, recipe, serialized_recipe):
+        deserialized_recipe = self.deserialize_new_recipe(serialized_recipe)
+
+        recipe.is_booked = deserialized_recipe.is_booked
+        recipe.booking_condition = deserialized_recipe.booking_condition
+        recipe.description = deserialized_recipe.description
+        recipe.enabled = deserialized_recipe.enabled
+        recipe.title = deserialized_recipe.title
+
     def __serialize_booking_condition(self, booking_condition):
         return BookingConditionSerializerFactory.create(booking_condition).serialize(booking_condition)
 
