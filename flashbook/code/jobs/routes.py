@@ -9,6 +9,7 @@ APP = webapp2.WSGIApplication(
         routes.PathPrefixRoute(JOBS_PREFIX, [
             webapp2.Route(JobsURLs.CHECK_RECIPES, handler=handlers.CheckRecipesHandler),
             webapp2.Route(JobsURLs.CHECK_RECIPE, handler=handlers.CheckRecipeHandler),
+            webapp2.Route(JobsURLs.PERFORM_BOOKINGS, handler=handlers.BookingHandler),
         ])
     ], debug=True
 )

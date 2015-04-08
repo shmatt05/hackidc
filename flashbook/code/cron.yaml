@@ -2,3 +2,7 @@ cron:
 - description: Cheking all enabled recipes
   url: /jobs/check-recipes
   schedule: every 15 minutes synchronized
+
+- description: Cheking all enabled recipes
+  url: /jobs/perform-bookings
+  schedule: every 5 minutes synchronize

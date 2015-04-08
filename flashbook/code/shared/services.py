@@ -197,28 +197,22 @@ class FlightSearch:
         try:
             urlfetch.set_default_fetch_deadline(60)
             return json.load(urllib2.urlopen(url))
-            # return url
         except Exception, ex:
             return False
 
 
-# TODO: ADD PNR and other details
 class EmailService(object):
-    def __init__(self, receiver_email, name, pnr):
-        self.receiver_email = receiver_email
-        self.pnr = pnr
-        self.sender_email = 'sender@flashbook-app.appspotmail.com'
-        self.name = name
+    sender_email = 'sender@flashbook-app.appspotmail.com'
 
-    def send_mail(self):
-        message = mail.EmailMessage("Flashbook Inc. <" + self.sender_email + ">",
+    def send_confirmation_email(self, user, booking_info):
+        message = mail.EmailMessage(sender="Flashbook Inc. <" + self.sender_email + ">",
                                     subject="Your Flight Has Been Booked!")
-        message.to(self.name + "<" + self.receiver_email + ">")
+        message.to(user.name + " <" + user.email + ">")
         message.body = """
-        Dear """ + str(self.name) + """,
+        Dear """ + user.name + """,
 
         Your flight has been succefully booked!
-        PNR : """ + str(self.pnr)
+        PNR : """ + json.dumps(booking_info.booking_infos)
 
         message.send()
 
@@ -228,6 +222,10 @@ class BookingService(object):
     Only works in the Live API, not in the sandbox HackIDC
     """
 
-    def book(self):
-        return "LYED" + str(randint(1134, 9999)) + "F"
+    def book(self, booking_info):
+        return booking_info is not None
 
+
+class FairnessService(object):
+    def pick_fairest_booking_info(self, booking_request, booking_requests):
+        return booking_request.booking_infos[0]

@@ -10,3 +10,4 @@ def get_jobs_full_url(url):
 class JobsURLs(object):
     CHECK_RECIPES = '/check-recipes'
     CHECK_RECIPE = '/check-recipe'
+    PERFORM_BOOKINGS = '/perform-bookings'
