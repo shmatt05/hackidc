@@ -4,7 +4,7 @@ $.ajax({
     //contentType : 'application/json; charset=UTF-8',
     type : 'POST'
 }).done(function(data, textStatus, jqXHR) {
-  alert(data);
+  console.log(data);
 
 }).fail(function(msg) {
     console.log(msg);
