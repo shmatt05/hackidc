@@ -3733,21 +3733,31 @@
     
  /* Added */
 .romvos{
-  width: 150px;
-  height: 150px;
+  width: 300px;
+  height: 300px;
   border: 9px solid #ccc;
   transform: rotateZ(45deg);
   -webkit-transform: rotateZ(45deg);
   /*margin: 40px 40px 0 40px;*/
   margin: auto;
-  margin-top: 80px;
-  margin-right: 80px;
+  margin-top: 100px;
+  margin-bottom: 20px;
+  margin-right: 100px;
+  margin-left: 100px;
   overflow:hidden;
   box-shadow: 9px 9px 0 0 #21B2A6;
   display:inline-block;
    -webkit-transition: box-shadow 0.4s;
   transition: box-shadow 0.4s;
 }
+
+@media only screen and (max-width: 500px) {
+    .romvos{
+        width: 150px;
+        height: 150px;
+    }
+}
+
 .romvos:first-child{
   margin-bottom: 80px;
   margin-top: 0px;
