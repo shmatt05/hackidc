@@ -2,11 +2,13 @@ from shared.framework import Handler
 from shared import Queues
 from google.appengine.api import taskqueue
 from shared.models import Recipe, BookingRequest
-from cron.examiners import BookingConditionExaminerFactory
 from shared.services import EmailService
 from shared.services import BookingService
+from jobs.examiners import BookingConditionExaminerFactory
+from jobs import JobsURLs, get_jobs_full_url
 
 __author__ = 'Ari'
+
 
 class CheckRecipeHandler(Handler):
 
@@ -24,15 +26,17 @@ class CheckRecipeHandler(Handler):
         self.data_service.update_entity(booking_request)
 
 
-
-class RecipesHandler(Handler):
+class CheckRecipesHandler(Handler):
     def post(self):
-        recipes_keys = self.data_service.query_entities(Recipe, keys_only=True)
+        enabled_recipes_filter = Recipe.enabled == True and Recipe.is_booked == False
+        recipes_keys = self.data_service.query_entities(Recipe, keys_only=True,
+                                                        filter_expression=enabled_recipes_filter)
 
         # Add the task to the recipe queue.
         for recipe in recipes_keys:
             taskqueue.Task(
-                params={'recipe_id':recipe.id()}
+                url=get_jobs_full_url(JobsURLs.CHECK_RECIPE),
+                params={'recipe_id': recipe.id()}
             ).add(Queues.CHECK_RECIPE_QUEUE)
 
 
