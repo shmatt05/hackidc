@@ -4,7 +4,8 @@ import urllib2
 from google.appengine.api import mail
 from google.appengine.ext import ndb
 from google.appengine.api import search, urlfetch
-from random import randint
+from shared.models import User
+from shared.framework import BusinessException
 
 __author__ = 'david'
 
@@ -229,3 +230,30 @@ class BookingService(object):
 class FairnessService(object):
     def pick_fairest_booking_info(self, booking_request, booking_requests):
         return booking_request.booking_infos[0]
+
+
+class AuthenticationService(object):
+    def __init__(self):
+        self.data_service = get_data_service()
+        self.default_user = User(name="Ari Propper",
+                                 email="aripro@gmail.com",
+                                 address="16, Rue Yafo, 94142 JERUSALEM, ISRAEL")
+
+    def login_user(self):
+        users = self.data_service.query_entities(User)
+        if users:
+            return users[0]
+        else:
+            self.data_service.update_entity(self.default_user)
+            return self.default_user
+
+    def authenticate_user(self):
+        users = self.data_service.query_entities(User)
+        if users:
+            return users[0]
+
+        raise BusinessException(400, 'Authentication Failed')
+
+
+def get_authentication_service():
+    return AuthenticationService()

@@ -34,13 +34,13 @@ class HotelBookingCondition(BookingCondition):
 
 
 class User(ndb.Model):
-    # TODO: implement.
     email = ndb.StringProperty(required=True)
     name = ndb.StringProperty(required=True)
+    address = ndb.StringProperty(required=True)
 
 
 class Recipe(ndb.Model):
-    user = ndb.KeyProperty(User, required=False)
+    user = ndb.KeyProperty(User, required=True)
     title = ndb.StringProperty()
     description = ndb.StringProperty()
     booking_condition = ndb.LocalStructuredProperty(BookingCondition, required=True)
@@ -51,7 +51,7 @@ class Recipe(ndb.Model):
 
 
 class BookingInfo(polymodel.PolyModel):
-    user = ndb.KeyProperty(User, required=False)
+    user = ndb.KeyProperty(User, required=True)
 
 
 class FlightBookingInfo(BookingInfo):
@@ -62,7 +62,7 @@ class FlightBookingInfo(BookingInfo):
 
 class BookingRequest(ndb.Model):
     recipe = ndb.KeyProperty(Recipe, required=True)
-    user = ndb.KeyProperty(User, required=False)
+    user = ndb.KeyProperty(User, required=True)
     booking_infos = ndb.LocalStructuredProperty(BookingInfo, repeated=True)
     is_booked = ndb.BooleanProperty(required=True, default=False)
 

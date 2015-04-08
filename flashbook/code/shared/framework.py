@@ -23,12 +23,19 @@ class BusinessException(BaseFrameworkException):
 class Handler(webapp2.RequestHandler):
     def __init__(self, *args, **kwargs):
         super(Handler, self).__init__(*args, **kwargs)
+        self.user = None
 
     @property
     def data_service(self):
         from shared.services import get_data_service
 
         return get_data_service()
+
+    @property
+    def authentication_service(self):
+        from shared.services import get_authentication_service
+
+        return get_authentication_service()
 
     def get_request_fields(self, default_fields):
         fields = self.request.get('fields')

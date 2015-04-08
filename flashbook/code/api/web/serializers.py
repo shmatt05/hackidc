@@ -8,6 +8,14 @@ TIME_FORMAT = '%H:%M:%S.%f'
 DATETIME_FORMAT = '%sT%sZ' % (DATE_FORMAT, TIME_FORMAT)
 
 
+class UserSerializer(object):
+    def serialize(self, user):
+        return dict(
+            name=user.name,
+            email=user.email
+        )
+
+
 class RecipeSerializer(object):
     def serialize(self, recipe):
         serialized_recipe = dict(
