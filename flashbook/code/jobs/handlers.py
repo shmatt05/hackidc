@@ -27,7 +27,10 @@ class CheckRecipeHandler(Handler):
             self.__create_booking_request(recipe, possible_booking_infos)
 
     def __create_booking_request(self, recipe, possible_booking_infos):
-        booking_request = BookingRequest(id=BookingRequest.calculate_id(recipe.user, recipe),
+        for possible_booking_info in possible_booking_infos:
+            possible_booking_info.user = recipe.user
+
+        booking_request = BookingRequest(id=BookingRequest.calculate_id(recipe.user, recipe.key),
                                          user=recipe.user,
                                          booking_infos=possible_booking_infos,
                                          recipe=recipe.key)

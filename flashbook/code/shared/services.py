@@ -206,14 +206,14 @@ class EmailService(object):
     sender_email = 'sender@flashbook-app.appspotmail.com'
 
     def send_confirmation_email(self, user, booking_info):
-        message = mail.EmailMessage(sender="Flashbook Inc. <" + self.sender_email + ">",
+        message = mail.EmailMessage(to=user.name + " <" + user.email + ">",
+                                    sender="Flashbook Inc. <" + self.sender_email + ">",
                                     subject="Your Flight Has Been Booked!")
-        message.to(user.name + " <" + user.email + ">")
         message.body = """
         Dear """ + user.name + """,
 
         Your flight has been succefully booked!
-        PNR : """ + json.dumps(booking_info.booking_infos)
+        PNR : """ + json.dumps(booking_info.itineraries)
 
         message.send()
 

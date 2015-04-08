@@ -67,5 +67,5 @@ class BookingRequest(ndb.Model):
     is_booked = ndb.BooleanProperty(required=True, default=False)
 
     @classmethod
-    def calculate_id(cls, user, recipe):
-        return "{0}::{1}".format(user.id() if user else 'sample', recipe.id())
+    def calculate_id(cls, user_key, recipe_key):
+        return "{0}::{1}".format(user_key.id(), recipe_key.id())
