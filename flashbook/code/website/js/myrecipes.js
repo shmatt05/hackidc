@@ -10,4 +10,13 @@ $.ajax({
     console.log(msg);
 });
 
+$.ajax({
+    url : 'http://flashbook-app.appspot.com/api/recipe/all',
+    dataType : 'json',
+    //contentType : 'application/json; charset=UTF-8',
+}).done(function(data, textStatus, jqXHR) {
+  console.log(data);
 
+}).fail(function(msg) {
+    console.log(msg);
+});
