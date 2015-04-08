@@ -8,6 +8,7 @@ from webapp2_extras import routes
 APP = webapp2.WSGIApplication(
     [
         routes.PathPrefixRoute(API_PREFIX, [
+            webapp2.Route(WebURLs.LOGIN, handler=handlers.LoginUserHandler),
             webapp2.Route(WebURLs.RECIPES, handler=handlers.RecipesHandler),
         ])
     ], debug=True
