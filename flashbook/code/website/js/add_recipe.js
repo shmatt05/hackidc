@@ -34,7 +34,7 @@ $(function () {
   
   function Book() {
   var booking_condition = {};
-  var book = {}
+  var book = {} ;
   booking_condition = {
         type: "flight",
         origin: "TLV",
@@ -57,9 +57,7 @@ $(function () {
         dataType : 'json',
         contentType : 'application/json; charset=UTF-8',
         type : 'POST',
-        data : {
-            JSON.stringify(book)
-        }
+        data : JSON.stringify(book)
     }).done(function(data, textStatus, jqXHR) {
         console.log(data);
     }).fail(function(msg) {
