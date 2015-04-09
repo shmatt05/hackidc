@@ -12,7 +12,7 @@
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="css/style - tomer.css" />
+		<link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/myRecipes.css">
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
@@ -85,25 +85,7 @@
 			<script src="js/init.js"></script>
             
             <script>
-            $(function() {
-                var login = login();
-                var recipies = recipies();
-                
-                $(".user").append("Hello " + login.authenticated_user.name); 
-                
-                 var rcpt = "";
-                 
-                recipies.response.recipies.forEach(function(rcpt) {
-                    rcpt += '<div class="cool_btn1 green" id="plane1" onclick="change_autorefreshdiv()">';
-                    rcpt += '<h1 class="top" id="top">' + rcpt.destination + '<i> ' + rcpt.origin + '</i></h1>';
-                    rcpt += '<h2><i class="fa fa-plane"></i></h2>';
-                    rcpt += '</div>';
-                    $(".recipies").append(rcpt);
-                    rcpt = "";
-                });
-                
-            });
-            function login() {
+            function login_data() {
                 $.ajax({
                     url : 'http://flashbook-app.appspot.com/api/user/login',
                     dataType : 'json',
@@ -111,7 +93,8 @@
                     type : 'POST'
                 }).done(function(data, textStatus, jqXHR) {
                   console.log(data);
-                  return data ;
+                  
+                  $(".user").append("Hello " + data.response.authenticated_user.name); 
 
                 }).fail(function(msg) {
                     console.log(msg);
@@ -119,7 +102,7 @@
                 });
             }
             
-            function recipies() {
+            function recipies_data() {
                 $.ajax({
                     url : 'http://flashbook-app.appspot.com/api/recipe/all',
                     dataType : 'json',
@@ -127,14 +110,40 @@
                     type : 'GET'
                 }).done(function(data, textStatus, jqXHR) {
                   console.log(data);
-                  return data ;
+                  
+                  var rcpt = "";
+                 
+                data.response.recipes.forEach(function(rcepie) {
+                console.log(rcepie)
+                    rcpt += '<div class="cool_btn1 green" id="plane1" onclick="change_autorefreshdiv()">';
+                    rcpt += '<h1 class="top" id="top">' + rcepie.booking_condition.destination + '<i> ' + rcepie.booking_condition.origin + '</i></h1>';
+                    rcpt += '<h2><i class="fa fa-plane"></i></h2>';
+                    rcpt += '</div>';
+                    $(".recipies").append(rcpt);
+                    rcpt = "";
+                });
 
                 }).fail(function(msg) {
                     console.log(msg);
                     return false;
                 });
             }
-
+            
+            function change_autorefreshdiv(){
+                var NAME = document.getElementById("plane1");
+                var currentClass = NAME.className;
+                if (currentClass == "cool_btn1 green") { // Check the current class name
+                    NAME.className = "cool_btn1 black";   // Set other class name
+                } else {
+                    NAME.className = "cool_btn1 green";  // Otherwise, use `second_name`
+                }
+            }   
+            
+            $(function() {
+                var login = login_data();
+                var recipies = recipies_data();                
+            });
+            
             </script>
 
 	</body>
