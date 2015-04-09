@@ -31,7 +31,7 @@ $(function () {
 
     });
   });
-  booking_condition
+  
   function Book() {
   var booking_condition;
   booking_condition = {
@@ -40,7 +40,7 @@ $(function () {
         destination:"LAS",
         booking_start_date:"2015-04-07T23:52:05.665530Z",
         booking_end_date:"2015-04-27T23:52:05.665530Z",
-        max_price"1,
+        max_price:1,
         min_duration:7,
         max_duration:8,
         number_of_connections:2,
