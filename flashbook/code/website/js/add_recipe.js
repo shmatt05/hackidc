@@ -61,25 +61,11 @@ $(function () {
         data : JSON.stringify(book)
     }).done(function(data, textStatus, jqXHR) {
         console.log(data);
+        window.location = "http://flashbook-app.appspot.com/my_recipes.html";
     }).fail(function(msg) {
        console.log(msg);
+       window.location = "http://flashbook-app.appspot.com/my_recipes.html";
     });
     
    
   }
- 
- /*
-  "title":"first",
-"booking_condition": {
-"type":"flight",
-"origin":"TLV",
-"destination":"LAS",
-"booking_start_date":"2015-04-07T23:52:05.665530Z",
-"booking_end_date":"2015-04-27T23:52:05.665530Z",
-"max_price":1,
-"min_duration":7,
-"max_duration":8,
-"number_of_connections":2,
-"max_flight_duration":40,
-"number_of_adult_tickets":1
-*/
