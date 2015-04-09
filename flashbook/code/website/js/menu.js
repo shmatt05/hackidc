@@ -16,5 +16,5 @@ nav += '</div>' ;
 nav += '</li>' ;
 nav += '</ul>' ;
 nav += '</nav>' ;
-$("#header").append(rcpt);
+$("#header").append(nav);
   
