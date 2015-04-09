@@ -37,13 +37,16 @@
         <section>
           <header>       
               <div class="row uniform">
-                <div class="6u 12u$(xsmall)">
-                  <input name="recipe-from" class="recipe from" id="dater-from" value="" placeholder="Possible Dates" type="text">
+                <div class="4u 12u$(xsmall)">
+                  <input name="recipe-from" class="recipe from" id="dater-from" value="" placeholder="Possible From Date" type="text">
                 </div>
                 
-                <div class="6u$ 12u$(xsmall)">
-                  <input name="recipe-duration" class="recipe duration" id="dater-duration" value=""
-                         placeholder="Duration Of Stay" type="text">
+                <div class="4u 12u$(xsmall)">
+                  <input type="hidden" id="dater-duration" value="23" />
+                </div>
+                
+                <div class="4u$ 12u$(xsmall)">
+                  <input name="recipe-from" class="recipe from" id="dater-to" value="" placeholder="Possible To Date" type="text">
                 </div>
               </div>
           </header>
@@ -106,7 +109,9 @@
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/skel.min.js"></script>
 <script src="js/init.js"></script>
+<script src="js/jquery.range-min.js"></script>
 <script src="js/add_recipe.js"></script>
 <script src="js/menu.js"></script>
+<script src="js/slider.js"></script>
 </body>
 </html>

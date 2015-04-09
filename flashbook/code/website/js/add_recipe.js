@@ -39,11 +39,11 @@ $(function () {
         type: "flight",
         origin: "TLV",
         destination:"LAS",
-        booking_start_date:"2015-04-07T23:52:05.665530Z",
-        booking_end_date:"2015-04-27T23:52:05.665530Z",
+        booking_start_date: $('#dater-from').val() + "T00:00:00.00001Z",
+        booking_end_date: $('#dater-to').val()+ "T00:00:00.00001Z",
         max_price:1,
-        min_duration:7,
-        max_duration:8,
+        min_duration:$('#dater-duration').val().split(",")[0],
+        max_duration:$('#dater-duration').val().split(",")[1],
         number_of_connections:2,
         max_flight_duration:40,
         number_of_adult_tickets:1
@@ -64,8 +64,9 @@ $(function () {
        console.log(msg);
     });
     
-    
+   
   }
+ 
  /*
   "title":"first",
 "booking_condition": {
