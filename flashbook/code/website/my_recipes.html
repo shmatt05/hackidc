@@ -66,22 +66,6 @@
             <script src="js/menu.js"></script>
             
             <script>
-            function login_data() {
-                $.ajax({
-                    url : 'http://flashbook-app.appspot.com/api/user/login',
-                    dataType : 'json',
-                    //contentType : 'application/json; charset=UTF-8',
-                    type : 'POST'
-                }).done(function(data, textStatus, jqXHR) {
-                  console.log(data);
-                  
-                  $(".user").text("Hello " + data.response.authenticated_user.name);
-
-                }).fail(function(msg) {
-                    console.log(msg);
-                    return false;
-                });
-            }
             
             function recipies_data() {
                 $.ajax({
@@ -101,9 +85,9 @@
                     var $id = 'plane' + itemId;
                     itemId++;
                     if (recipe.enabled) {
-                      rcpt += '<div class="cool_btn1 green" id="' + $id + '" onclick="change_autorefreshdiv("' + $id + '")">';
+                      rcpt += '<div class="cool_btn1 green">';
                     } else {
-                      rcpt += '<div class="cool_btn1 black" id="' + $id + '" onclick="change_autorefreshdiv("' + $id + '")">';
+                      rcpt += '<div class="cool_btn1 black>';
                     }
                     rcpt += '<h1 class="top" id="top">' + recipe.booking_condition.destination + '<i> ' + recipe.booking_condition.origin + '</i></h1>';
                     rcpt += '<h2><i class="fa fa-plane"></i></h2>';
@@ -119,20 +103,13 @@
                     return false;
                 });
             }
-            
-            function change_autorefreshdiv(id){
-                var NAME = document.getElementById(id);
-                var currentClass = NAME.className;
-                if (currentClass == "cool_btn1 green") { // Check the current class name
-                    NAME.className = "cool_btn1 black";   // Set other class name
-                } else {
-                    NAME.className = "cool_btn1 green";  // Otherwise, use `second_name`
-                }
-            }   
-            
+
             $(function() {
-                var login = login_data();
-                var recipies = recipies_data();                
+                var recipies = recipies_data();
+
+              $('.cool_btn1').click(function() {
+                $(this).toggleClass('green').toggleClass('black');
+              });
             });
             
             </script>
