@@ -35,3 +35,20 @@ $(function () {
   function Book() {
   alert("asd");
   }
+  
+  function login_data() {
+                $.ajax({
+                    url : 'http://flashbook-app.appspot.com/api/user/login',
+                    dataType : 'json',
+                    //contentType : 'application/json; charset=UTF-8',
+                    type : 'POST'
+                }).done(function(data, textStatus, jqXHR) {
+                  console.log(data);
+                  
+                  $(".user").append("Hello " + data.response.authenticated_user.name); 
+
+                }).fail(function(msg) {
+                    console.log(msg);
+                    return false;
+                });
+            }
