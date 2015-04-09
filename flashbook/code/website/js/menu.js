@@ -1,0 +1,20 @@
+nav = "" ;
+nav += '<h1><a href="index.html">Flashbook</a></h1>' ;
+nav += '<nav id="nav">' ;
+nav += '<ul>' ;
+nav += '<li class="special">' ;
+nav += '<a href="#" class="menuToggle"><span>Menu</span></a>' ;
+nav += '<div id="menu">' ;
+nav += '<ul>' ;
+nav += '<li><a href="index.html">Home</a></li>' ;
+nav += '<li><a href="add_recipe.html">Add a recipe</a></li>' ;
+nav += '<li><a href="my_recipes.html">My recipes</a></li>' ;
+nav += '<li><a href="#">Sign Up</a></li>' ;
+nav += '<li><a href="#">Log In</a></li>' ;
+nav += '</ul>' ;
+nav += '</div>' ;
+nav += '</li>' ;
+nav += '</ul>' ;
+nav += '</nav>' ;
+$("#header").append(nav);
+  
