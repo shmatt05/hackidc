@@ -58,7 +58,7 @@ $(function () {
         }
     }).done(function(data, textStatus, jqXHR) {
         console.log(data);
-    }).fail(function() {
+    }).fail(function(msg) {
        console.log(msg);
     });
     
