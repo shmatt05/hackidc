@@ -3748,7 +3748,20 @@
   box-shadow: 9px 9px 0 0 #21B2A6;
   display:inline-block;
    -webkit-transition: box-shadow 0.4s;
-  transition: box-shadow 0.4s;
+  transition: all 0.4s ease-in-out;
+
+}
+
+.romvos.selected {
+  transform: rotateZ(0deg);
+  -webkit-transform: rotateZ(0deg);
+  transition: all 0.4s ease-in-out;
+
+}
+
+.romvos.selected input{
+  -webkit-transform: rotateZ(0deg);
+  transform: rotateZ(0deg);
 }
 
 @media only screen and (max-width: 500px) {
@@ -3773,12 +3786,13 @@
 .romvos:hover {
   box-shadow: 0 0 0 0 #ccc;
   -webkit-transition: box-shadow 0.7s;
-  transition: box-shadow 0.7s;
+  transition: all 0.4s ease-in-out;
 }
 .romvos:hover img{
   opacity: 1;
    -webkit-transition: opacity 0.7s;
   transition: opacity 0.7s;
+
 }
 .romvos input{
     position:relative;
@@ -3872,20 +3886,4 @@ padding: 2em 2em 4em;
   background-size: cover;
 }
 
-.romvos:before {
-  background-size: cover;
 
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  top: -50%;
-  left: -50%;
-  z-index: -1;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-
-}

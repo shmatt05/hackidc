@@ -120,7 +120,7 @@
 
 
           <div class="romvos right">
-            <!--<img src="http://top-antropos.com/images/7/Maria-Callas/Maria-Callas%20(14).jpg"/>-->
+            <!--<img src="images/tlv.jpg"/>-->
             <input type="text" class="recipe-autocomplete" id="recipe-from" value=""
                    placeholder="Destination City Or Airport"/>
           </div>
@@ -167,6 +167,10 @@
 <script>
   $(function () {
 
+
+
+
+
     $(".recipe-autocomplete").autocomplete({
       source: function (request, response) {
         $.ajax({
@@ -183,8 +187,9 @@
       },
       minLength: 3,
       select: function (event, ui) {
-        var $url = 'images/' + $('.romvos.left input').val().toLowerCase() + '.jpg';
-        $('.romvos.left:before').css('background-image', 'url(' + $url + ')');
+        var $url = 'images/' + $(event.target.parentElement).find('input').val().toLowerCase() + '.jpg';
+        $(event.target.parentElement).css('background-image', 'url(' + $url + ')').addClass('selected');
+        $(event.target).blur();
       },
       open: function () {
         $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
@@ -192,6 +197,10 @@
       close: function () {
         $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
       }
+    }).focus(function() {
+
+      $(this).val('').parent().removeClass('selected').css('background-image', '');
+
     });
   });
 </script>
