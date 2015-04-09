@@ -61,10 +61,15 @@ $(function () {
         data : JSON.stringify(book)
     }).done(function(data, textStatus, jqXHR) {
         console.log(data);
-        window.location = "http://flashbook-app.appspot.com/my_recipes.html";
+        setTimeout(function(){
+            window.location = "http://flashbook-app.appspot.com/my_recipes.html";
+        }, 2000);
+        
     }).fail(function(msg) {
        console.log(msg);
-       window.location = "http://flashbook-app.appspot.com/my_recipes.html";
+       setTimeout(function(){
+            window.location = "http://flashbook-app.appspot.com/my_recipes.html";
+        }, 2000);
     });
     
    
