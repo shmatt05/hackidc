@@ -41,7 +41,7 @@ $(function () {
         destination:"LAS",
         booking_start_date: $('#dater-from').val() + "T00:00:00.00001Z",
         booking_end_date: $('#dater-to').val()+ "T00:00:00.00001Z",
-        max_price:1,
+        max_price:$('#recipe-price'),
         min_duration:$('#dater-duration').val().split(",")[0],
         max_duration:$('#dater-duration').val().split(",")[1],
         number_of_connections:2,
