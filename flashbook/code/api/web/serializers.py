@@ -91,20 +91,19 @@ class FlightBookingConditionSerializer(object):
             booking_start_date=flight_booking_condition.booking_start_date.strftime(DATETIME_FORMAT),
             booking_end_date=flight_booking_condition.booking_end_date.strftime(DATETIME_FORMAT),
             exclude_companies=flight_booking_condition.exclude_companies,
-            max_price=flight_booking_condition.max_price
+            max_price=flight_booking_condition.max_price,
+            min_duration=flight_booking_condition.min_duration,
+            max_duration=flight_booking_condition.max_duration
         )
-
-        if flight_booking_condition.duration is not None:
-            serialized_flight_booking_condition['duration'] = flight_booking_condition.duration
 
         if flight_booking_condition.number_of_connections is not None:
             serialized_flight_booking_condition[
                 'number_of_connections'] = flight_booking_condition.number_of_connections
 
-        if flight_booking_condition.duration is not None:
+        if flight_booking_condition.max_flight_duration is not None:
             serialized_flight_booking_condition['max_flight_duration'] = flight_booking_condition.max_flight_duration
 
-        if flight_booking_condition.duration is not None:
+        if flight_booking_condition.number_of_adult_tickets is not None:
             serialized_flight_booking_condition[
                 'number_of_adult_tickets'] = flight_booking_condition.number_of_adult_tickets
 
@@ -120,10 +119,9 @@ class FlightBookingConditionSerializer(object):
                                                           booking_end_date=datetime.strptime(
                                                               serialized_flight_booking_condition['booking_end_date'],
                                                               DATETIME_FORMAT),
-                                                          max_price=serialized_flight_booking_condition['max_price'])
-
-        if 'duration' in serialized_flight_booking_condition:
-            flight_booking_condition.duration = serialized_flight_booking_condition['duration']
+                                                          max_price=serialized_flight_booking_condition['max_price'],
+                                                          min_duration=serialized_flight_booking_condition['min_duration'],
+                                                          max_duration=serialized_flight_booking_condition['max_duration'])
 
         if 'number_of_connections' in serialized_flight_booking_condition:
             flight_booking_condition.number_of_connections = serialized_flight_booking_condition[

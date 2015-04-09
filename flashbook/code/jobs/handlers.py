@@ -39,7 +39,7 @@ class CheckRecipeHandler(Handler):
 
 
 class CheckRecipesHandler(Handler):
-    def post(self):
+    def get(self):
         enabled_recipes_filter = Recipe.enabled == True and Recipe.is_booked == False
         recipes_keys = self.data_service.query_entities(Recipe, keys_only=True,
                                                         filter_expression=enabled_recipes_filter)
@@ -59,7 +59,7 @@ class BookingHandler(Handler):
         self.booking_service = BookingService()
         self.email_service = EmailService()
 
-    def post(self):
+    def get(self):
         booking_requests = self.data_service.query_entities(BookingRequest,
                                                             filter_expression=BookingRequest.is_booked == False)
 

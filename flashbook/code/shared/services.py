@@ -1,6 +1,9 @@
 import logging
 import json
 import urllib2
+import random
+import os
+import sys
 from google.appengine.api import mail
 from google.appengine.ext import ndb
 from google.appengine.api import search, urlfetch
@@ -206,25 +209,57 @@ class EmailService(object):
     sender_email = 'sender@flashbook-app.appspotmail.com'
 
     def send_confirmation_email(self, user, booking_info):
+        confirmation_format = open(os.path.dirname(__file__) + '/assets/confirmation_format.html').read()
+
+        outbound_table = self.__build_itineraries(booking_info.origin, booking_info.destination,
+                                                  booking_info.itineraries[0]['outbound'])
+
+        inbound_table = self.__build_itineraries(booking_info.destination, booking_info.origin,
+                                                 booking_info.itineraries[0]['inbound'])
+
         message = mail.EmailMessage(to=user.name + " <" + user.email + ">",
                                     sender="Flashbook Inc. <" + self.sender_email + ">",
-                                    subject="Your Flight Has Been Booked!")
-        message.body = """
-        Dear """ + user.name + """,
-
-        Your flight has been succefully booked!
-        PNR : """ + json.dumps(booking_info.itineraries)
+                                    subject="Your Flight Has Been Booked!",
+                                    html=confirmation_format.replace('{name}', user.name)
+                                    .replace('{passport}', '3433222093')
+                                    .replace('{pnr}', booking_info.pnr or '')
+                                    .replace('{origin}', booking_info.origin)
+                                    .replace('{destination}', booking_info.destination)
+                                    .replace('{price}', str(booking_info.price))
+                                    .replace('{outbound}', outbound_table)
+                                    .replace('{inbound}', inbound_table))
 
         message.send()
+
+    def __build_itineraries(self, origin, destination, itinerary):
+        result = '<table><tr><td colspan="4">{0} to {1}</td></tr>'.format(origin, destination)
+        flights = itinerary['flights']
+        i = 1
+        for flight in flights:
+            departure = flight['departs_at']
+            arrival = flight['arrives_at']
+            origin = flight['origin']['airport']
+            destination = flight['destination']['airport']
+            flight_num = flight['operating_airline'] + flight['flight_number']
+            result += '<tr><td>Flight {0}</td><td>Departure: {1} from {2}</td><td>Arrival: {3} to {4}</td><td>Flight #: {5}</td></tr>'.format(
+                i, departure, origin, arrival, destination, flight_num)
+            i += 1
+
+        result += '</table>'
+        return result
 
 
 class BookingService(object):
     """
-    Only works in the Live API, not in the sandbox HackIDC
+    Only works in the Live API, not in the sandbox HackIDC,
+    So we mock the booking process.
     """
 
     def book(self, booking_info):
-        return booking_info is not None
+        if booking_info:
+            booking_info.pnr = str(random.randint(0, sys.maxint))
+
+        return booking_info
 
 
 class FairnessService(object):

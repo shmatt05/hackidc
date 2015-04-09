@@ -46,7 +46,9 @@ class FlightBookingConditionExaminer(BookingConditionExaminer):
     def __create_booking_info(self, possible_result):
         return FlightBookingInfo(price=float(possible_result['fare']['total_price']),
                                  number_of_adult_tickets=self._booking_condition.number_of_adult_tickets,
-                                 itineraries=possible_result['itineraries'])
+                                 itineraries=possible_result['itineraries'],
+                                 origin=self._booking_condition.origin,
+                                 destination=self._booking_condition.destination)
 
     def __get_possible_results(self):
         flight = FlightSearch()
@@ -57,7 +59,7 @@ class FlightBookingConditionExaminer(BookingConditionExaminer):
         inspiration_data = flight.inspiration_search(fbc.origin, destination=fbc.destination,
                                                      departure_date=departure_start.strftime(
                                                          FMD) + "--" + fbc.booking_end_date.strftime(FMD),
-                                                     duration=fbc.duration,
+                                                     duration=str(fbc.min_duration) + "--" + str(fbc.max_duration),
                                                      direct="true" if fbc.number_of_connections == 0 else "false",
                                                      max_price=fbc.max_price)
 

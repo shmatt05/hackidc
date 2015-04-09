@@ -16,10 +16,9 @@ class FlightBookingCondition(BookingCondition):
     destination = ndb.StringProperty(required=True)
     booking_start_date = ndb.DateTimeProperty(required=True)
     booking_end_date = ndb.DateTimeProperty(required=True)
-    # If the duration is None, it means the trip starts at booking_start_date and ends at booking_end_date.
-    # TODO: add min max duration
-    duration = ndb.IntegerProperty()
-    number_of_connections = ndb.IntegerProperty()
+    min_duration = ndb.IntegerProperty(required=True)
+    max_duration = ndb.IntegerProperty(required=True)
+    number_of_connections = ndb.IntegerProperty(required=True, default=0)
     exclude_companies = ndb.StringProperty(repeated=True)
     max_flight_duration = ndb.IntegerProperty()
     number_of_adult_tickets = ndb.IntegerProperty(required=True, default=1)
@@ -58,6 +57,9 @@ class FlightBookingInfo(BookingInfo):
     price = ndb.FloatProperty(required=True)
     number_of_adult_tickets = ndb.IntegerProperty(required=True)
     itineraries = ndb.JsonProperty(required=True)
+    origin = ndb.StringProperty(required=True)
+    destination = ndb.StringProperty(required=True)
+    pnr = ndb.StringProperty()
 
 
 class BookingRequest(ndb.Model):
