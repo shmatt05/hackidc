@@ -50,7 +50,7 @@ $(function () {
   $.ajax({
         url : 'http://flashbook-app.appspot.com/api/recipe/all',
         dataType : 'json',
-        //contentType : 'application/json; charset=UTF-8',
+        contentType : 'application/json; charset=UTF-8',
         type : 'POST',
         data : {
             title : "",
