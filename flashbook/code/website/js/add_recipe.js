@@ -41,7 +41,7 @@ $(function () {
         destination:$('#recipe-destination').val(),
         booking_start_date: $('#dater-from').val() + "T00:00:00.00001Z",
         booking_end_date: $('#dater-to').val()+ "T00:00:00.00001Z",
-        max_price:$('#recipe-price'),
+        max_price:$('#recipe-price').val(),
         min_duration:$('#dater-duration').val().split(",")[0],
         max_duration:$('#dater-duration').val().split(",")[1],
         number_of_connections:2,
