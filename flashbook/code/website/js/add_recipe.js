@@ -37,8 +37,8 @@ $(function () {
   var book = {} ;
   booking_condition = {
         type: "flight",
-        origin: "TLV",
-        destination:"LAS",
+        origin: $('#recipe-origin').val(),
+        destination:$('#recipe-destination').val(),
         booking_start_date: $('#dater-from').val() + "T00:00:00.00001Z",
         booking_end_date: $('#dater-to').val()+ "T00:00:00.00001Z",
         max_price:$('#recipe-price'),
@@ -52,6 +52,7 @@ $(function () {
     title: "",
     booking_condition: booking_condition
   }
+  console.log(book);
   $.ajax({
         url : 'http://flashbook-app.appspot.com/api/recipe/all',
         dataType : 'json',
