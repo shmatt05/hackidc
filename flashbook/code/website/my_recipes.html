@@ -66,7 +66,7 @@
             <script src="js/menu.js"></script>
             
             <script>
-            
+
             function recipies_data() {
                 $.ajax({
                     url : 'http://flashbook-app.appspot.com/api/recipe/all',
@@ -75,7 +75,7 @@
                     type : 'GET'
                 }).done(function(data, textStatus, jqXHR) {
                   console.log(data);
-                  
+
                   var rcpt = "";
                  var itemId = 1;
                 data.response.recipes.forEach(function(recipe) {
@@ -87,7 +87,7 @@
                     if (recipe.enabled) {
                       rcpt += '<div class="cool_btn1 green">';
                     } else {
-                      rcpt += '<div class="cool_btn1 black>';
+                      rcpt += '<div class="cool_btn1 black">';
                     }
                     rcpt += '<h1 class="top" id="top">' + recipe.booking_condition.destination + '<i> ' + recipe.booking_condition.origin + '</i></h1>';
                     rcpt += '<h2><i class="fa fa-plane"></i></h2>';
