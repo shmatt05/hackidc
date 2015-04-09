@@ -15,7 +15,7 @@ body {
 }
 
 /* line 17, ../sass/screen.scss */
-#wrapper {
+#dana {
   width: 900px;
   margin: 10px auto 0 auto;
 }
@@ -247,19 +247,19 @@ Media Queries
 -------------------- */
 @media screen and (max-width: 860px) {
   /* line 147, ../sass/screen.scss */
-  #wrapper {
+  #dana {
     width: 700px;
   }
 }
 @media screen and (max-width: 740px) {
   /* line 152, ../sass/screen.scss */
-  #wrapper {
+  #dana {
     width: 480px;
   }
 }
 @media screen and (max-width: 440px) {
   /* line 157, ../sass/screen.scss */
-  #wrapper {
+  #dana {
     width: 370px;
     text-align: center;
   }

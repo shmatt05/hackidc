@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Elements - Spectral by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="css/style - tomer.css" />
+        <link rel="stylesheet" href="css/myRecipes.css">
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Flashbook</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="add_recipe2.html">Add a recipe</a></li>
+											<li><a href="my_recipes.html">My recipes</a></li>
+											<li><a href="#">Sign Up</a></li>
+											<li><a href="#">Log In</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<section class="wrapper recipe style5">
+							<div class="inner">
+								<section>
+                                <header class="user">
+
+									</header>
+                                    <hr />
+									<header class="recipies">
+
+									</header>
+								</section>
+							</div>
+						</section>
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="js/jquery.min.js"></script>
+			<script src="js/jquery.scrollex.min.js"></script>
+			<script src="js/jquery.scrolly.min.js"></script>
+            <script src="js/jquery-ui.min.js"></script>
+			<script src="js/skel.min.js"></script>
+			<script src="js/init.js"></script>
+            
+            <script>
+            $(function() {
+                var login = login();
+                var recipies = recipies();
+                
+                $(".user").append("Hello " + login.authenticated_user.name); 
+                
+                 var rcpt = "";
+                 
+                recipies.response.recipies.forEach(function(rcpt) {
+                    rcpt += '<div class="cool_btn1 green" id="plane1" onclick="change_autorefreshdiv()">';
+                    rcpt += '<h1 class="top" id="top">' + rcpt.destination + '<i> ' + rcpt.origin + '</i></h1>';
+                    rcpt += '<h2><i class="fa fa-plane"></i></h2>';
+                    rcpt += '</div>';
+                    $(".recipies").append(rcpt);
+                    rcpt = "";
+                });
+                
+            });
+            function login() {
+                $.ajax({
+                    url : 'http://flashbook-app.appspot.com/api/user/login',
+                    dataType : 'json',
+                    //contentType : 'application/json; charset=UTF-8',
+                    type : 'POST'
+                }).done(function(data, textStatus, jqXHR) {
+                  console.log(data);
+                  return data ;
+
+                }).fail(function(msg) {
+                    console.log(msg);
+                    return false;
+                });
+            }
+            
+            function recipies() {
+                $.ajax({
+                    url : 'http://flashbook-app.appspot.com/api/recipe/all',
+                    dataType : 'json',
+                    //contentType : 'application/json; charset=UTF-8',
+                    type : 'GET'
+                }).done(function(data, textStatus, jqXHR) {
+                  console.log(data);
+                  return data ;
+
+                }).fail(function(msg) {
+                    console.log(msg);
+                    return false;
+                });
+            }
+
+            </script>
+
+	</body>
+</html>
