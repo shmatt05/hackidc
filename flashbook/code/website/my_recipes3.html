@@ -115,10 +115,11 @@
                  var itemId = 1;
                 data.response.recipes.forEach(function(recipe) {
                 console.log(recipe);
-                  var $id = 'plane' + itemId;
-                  itemId++;
-                  if (!recipe.booking_condition.is_booked) {
-                    if (recipe.booking_condition.enabled) {
+
+                  if (!recipe.is_booked) {
+                    var $id = 'plane' + itemId;
+                    itemId++;
+                    if (recipe.enabled) {
                       rcpt += '<div class="cool_btn1 green" id=" + $id + " onclick="change_autorefreshdiv(" + $id + ")">';
                     } else {
                       rcpt += '<div class="cool_btn1 black" id=" + $id + " onclick="change_autorefreshdiv(" + $id + ")">';
