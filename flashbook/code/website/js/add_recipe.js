@@ -33,7 +33,8 @@ $(function () {
   });
   
   function Book() {
-  var booking_condition;
+  var booking_condition = {};
+  var book = {}
   booking_condition = {
         type: "flight",
         origin: "TLV",
@@ -47,14 +48,17 @@ $(function () {
         max_flight_duration:40,
         number_of_adult_tickets:1
     }
+  book = {
+    title: "",
+    booking_condition: booking_condition
+  }
   $.ajax({
         url : 'http://flashbook-app.appspot.com/api/recipe/all',
         dataType : 'json',
         contentType : 'application/json; charset=UTF-8',
         type : 'POST',
         data : {
-            title : "",
-            booking_condition : booking_condition
+            JSON.stringify(book)
         }
     }).done(function(data, textStatus, jqXHR) {
         console.log(data);
