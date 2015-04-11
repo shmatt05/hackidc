@@ -1,3 +1,4 @@
+// autocomplete amadeus
 $(function () {
     $(".recipe-autocomplete").autocomplete({
       source: function (request, response) {
@@ -32,6 +33,7 @@ $(function () {
     });
   });
   
+  //booking function
   function Book() {
   var booking_condition = {};
   var book = {} ;
@@ -74,3 +76,25 @@ $(function () {
     
    
   }
+  //jquery ui datepicker
+  $(function(){
+    $( "#dater-from, #dater-to, #datepicker" ).datepicker({
+        inline: true,
+        //nextText: '&rarr;',
+        //prevText: '&larr;',
+        showOtherMonths: true,
+        dateFormat: 'yy-mm-dd',
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        numberOfMonths: [ 1, 1],
+        autoSize: true,
+        duration: "slow",
+        firstDay: 1,
+        //showAnim: "fold",
+        showButtonPanel: true,
+        showWeek: false,
+        yearRange: "1980:2020",
+        //showOn: "button",
+        //buttonImage: "img/calendar-blue.png",
+        buttonImageOnly: true,
+      });
+    });

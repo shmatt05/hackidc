@@ -7,7 +7,7 @@ $(document).ready(function(){
         step: 1,
         scale: [0,25,50,75,100],
         format: '%s',
-        width: 300,
+        width: 270,
         showLabels: true,
         isRange : true
     });
