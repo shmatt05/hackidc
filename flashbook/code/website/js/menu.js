@@ -34,4 +34,16 @@ nav += '</li>' ;
 nav += '</ul>' ;
 nav += '</nav>' ;
 $("#header").append(nav);
+
+footer = "";
+footer += '<ul class="icons">';
+footer += '<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>';
+footer += '<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>';
+footer += '<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>';
+footer += '<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>';
+footer += '<li><a href="mailto:aripro@gmail.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>';
+footer += '</ul>';
+
+$("#footer").append(footer);
+
 login_data();

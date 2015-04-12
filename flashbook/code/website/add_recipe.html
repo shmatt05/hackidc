@@ -6,7 +6,7 @@
 -->
 <html>
 <head>
-  <title>FlashBook - Add Recipe</title>
+  <title>Flashbook - Add Recipe</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="description" content=""/>
@@ -14,11 +14,40 @@
   <!--[if lte IE 8]>
   <script src="css/ie/html5shiv.js"></script><![endif]-->
   <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/jquery.range.css"/>
+  <link rel="stylesheet" href="css/jquery-ui.min.css">
+  <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+  <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
   <!--[if lte IE 9]>
   <link rel="stylesheet" href="css/ie/v9.css"/><![endif]-->
   <!--[if lte IE 8]>
   <link rel="stylesheet" href="css/ie/v8.css"/><![endif]-->
 </head>
+<style>
+.ui-datepicker {
+  /*font-size: 80%;*/ 
+  z-index: 3 !important;
+  line-height: 1;
+  letter-spacing: 0px;
+
+}
+.ui-datepicker .ui-datepicker-buttonpane button {
+  /*font-size: 80%;*/ 
+  line-height: 1;
+  height: auto;
+}
+.ui-datepicker table th {
+  color:#000;
+}
+.ui-datepicker a{
+  border-bottom: none;
+}
+.slider-container {
+  width:100%;
+  margin: auto;
+  margin-top:2vh; 
+}
+</style>
 <body>
 
 <!-- Page Wrapper -->
@@ -37,13 +66,16 @@
         <section>
           <header>       
               <div class="row uniform">
-                <div class="6u 12u$(xsmall)">
-                  <input name="recipe-from" class="recipe from" id="dater-from" value="" placeholder="Possible Dates" type="text">
+                <div class="4u 12u$(xsmall)">
+                  <input name="recipe-from" class="recipe from" id="dater-from" value="" placeholder="Possible From Date" type="text">
                 </div>
                 
-                <div class="6u$ 12u$(xsmall)">
-                  <input name="recipe-duration" class="recipe duration" id="dater-duration" value=""
-                         placeholder="Duration Of Stay" type="text">
+                <div class="4u 12u$(xsmall)">
+                  <input type="hidden" id="dater-duration" value="23" />
+                </div>
+                
+                <div class="4u$ 12u$(xsmall)">
+                  <input name="recipe-from" class="recipe from" id="dater-to" value="" placeholder="Possible To Date" type="text">
                 </div>
               </div>
           </header>
@@ -84,17 +116,7 @@
 
   <!-- Footer -->
   <footer id="footer">
-    <ul class="icons">
-      <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-      <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-      <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-      <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-      <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-    </ul>
-    <ul class="copyright">
-      <li>&copy; Untitled</li>
-      <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-    </ul>
+    <!--  -->
   </footer>
 
 </div>
@@ -106,7 +128,32 @@
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/skel.min.js"></script>
 <script src="js/init.js"></script>
+<script src="js/jquery.range-min.js"></script>
 <script src="js/add_recipe.js"></script>
 <script src="js/menu.js"></script>
+<script src="js/slider.js"></script>
+<script>
+$(function(){
+    $( "#dater-from, #dater-to, #datepicker" ).datepicker({
+        inline: true,
+        //nextText: '&rarr;',
+        //prevText: '&larr;',
+        showOtherMonths: true,
+        dateFormat: 'yy-mm-dd',
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        numberOfMonths: [ 1, 1],
+        autoSize: true,
+        duration: "slow",
+        firstDay: 1,
+        //showAnim: "fold",
+        showButtonPanel: true,
+        showWeek: false,
+        yearRange: "1980:2020",
+        //showOn: "button",
+        //buttonImage: "img/calendar-blue.png",
+        buttonImageOnly: true,
+      });
+    });
+</script>
 </body>
 </html>
