@@ -4,7 +4,7 @@ from shared.models import Recipe, User
 from serializers import RecipeSerializer, UserSerializer
 from validators import InsertRecipeValidator
 from datetime import datetime
-
+import logging
 __author__ = 'david'
 
 
@@ -44,6 +44,7 @@ class RecipesHandler(Handler):
 
     @authenticate_user()
     def post(self):
+        logging.info(self.request.body)
         serializer = RecipeSerializer()
         serialized_recipe = json.loads(self.request.body)
 

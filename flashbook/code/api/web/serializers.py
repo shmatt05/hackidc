@@ -119,9 +119,9 @@ class FlightBookingConditionSerializer(object):
                                                           booking_end_date=datetime.strptime(
                                                               serialized_flight_booking_condition['booking_end_date'],
                                                               DATETIME_FORMAT),
-                                                          max_price=serialized_flight_booking_condition['max_price'],
-                                                          min_duration=serialized_flight_booking_condition['min_duration'],
-                                                          max_duration=serialized_flight_booking_condition['max_duration'])
+                                                          max_price=int(serialized_flight_booking_condition['max_price']),
+                                                          min_duration=int(serialized_flight_booking_condition['min_duration']),
+                                                          max_duration=int(serialized_flight_booking_condition['max_duration']))
 
         if 'number_of_connections' in serialized_flight_booking_condition:
             flight_booking_condition.number_of_connections = serialized_flight_booking_condition[

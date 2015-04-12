@@ -43,7 +43,7 @@ class Recipe(ndb.Model):
     title = ndb.StringProperty()
     description = ndb.StringProperty()
     booking_condition = ndb.LocalStructuredProperty(BookingCondition, required=True)
-    enabled = ndb.BooleanProperty(required=True, default=False)
+    enabled = ndb.BooleanProperty(required=True, default=True)
     enabled_at = ndb.DateTimeProperty()
     created_at = ndb.DateTimeProperty(auto_now_add=True)
     is_booked = ndb.BooleanProperty(required=True, default=False)
