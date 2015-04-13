@@ -3956,7 +3956,7 @@ padding: 2em 2em 4em;
 	top: 0; left: 0; right: 0; bottom: 0;
 }
 .contact a {
-	background-image: url(/images/team/level-1-c.png);
+	/*background-image: url(/images/team/level-1-c.png);*/
 }
 .team-figure .contact a {
 	position: absolute;
